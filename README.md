@@ -1,8 +1,8 @@
 # Convocation-portal
 
 ## Alumni form
---> Go to public folder/
---> Alumni Form
+project/public folder/Alumni.pdf
+
 
 ## To start the frontend
 --> cd project
