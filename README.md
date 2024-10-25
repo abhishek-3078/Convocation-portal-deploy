@@ -1,5 +1,9 @@
 # Convocation-portal
 
+## Alumni form
+--> Go to public folder/
+--> Alumni Form
+
 ## To start the frontend
 --> cd project
 --> npm install
