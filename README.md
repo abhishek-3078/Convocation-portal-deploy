@@ -1,7 +1,7 @@
 # Convocation-portal
 
 ## Alumni form
-project/public folder/Alumni.pdf
+project/public/Alumni.pdf
 
 
 ## To start the frontend
