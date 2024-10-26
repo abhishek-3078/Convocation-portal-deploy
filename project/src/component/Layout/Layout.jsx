@@ -7,6 +7,7 @@ import Lottie from "lottie-react";
 import animationData from "../helper/animation1.json";
 
 const Layout = ({ children, title, description, keywords, author }) => {
+  
   return (
     <div>
       <Helmet>

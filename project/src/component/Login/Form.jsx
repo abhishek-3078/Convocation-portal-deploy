@@ -30,8 +30,8 @@ const Form = () => {
       if (response.ok) {
         response = await response.json();
         if (response.success) {
-          setAuth({ ...auth, token: response.token, role: response.role });
-          localStorage.setItem("auth", JSON.stringify({ token: response.token, role: response.role }));
+          setAuth({ ...auth, token: response.token});
+          localStorage.setItem("auth", JSON.stringify({ token: response.token}));
           navigate("/dashboard/main");
         } else {
           toast.error("You are not registered");
@@ -44,7 +44,7 @@ const Form = () => {
     }
   };
 
-  const handleGoogle = () => {
+  const handleGoogle = async() => {
     window.location.href = "http://localhost:8080/api/v1/auth/google";
   };
 

@@ -1,105 +1,98 @@
 /* Form.module.css */
 
-.container {
-    background-color: white;
-    padding: 20px 40px;
-    border-radius: 1.5rem;
-    border: 2px solid #f3f4f6;
-    overflow-y: scroll;
-  }
-  
-  .title {
-    font-size: 2.5rem;
-    font-weight: 600;
-    color: black;
-  }
-  
-  .subtitle {
-    font-size: 1rem;
-    font-weight: 500;
-    color: #6b7280;
-    margin-top: 1rem;
-  }
-  
-  .inputGroup {
-    margin-top: 2rem;
-  }
-  
-  .label {
-    font-size: 1rem;
-    font-weight: 500;
-  }
-  
-  .input {
-    width: 100%;
-    border: 2px solid #f3f4f6;
-    border-radius: 0.75rem;
-    padding: 1rem;
-    margin-top: 0.25rem;
-    background-color: transparent;
-  }
-  
-  .buttonGroup {
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .buttonPrimary {
-    padding: 0.75rem;
-    border-radius: 0.75rem;
-    background-color: #7c3aed;
-    color: white;
-    font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out;
-  }
-  
-  .buttonPrimary:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-  
-  .buttonPrimary:hover {
-    transform: scale(1.01);
-  }
-  
-  .buttonSecondary {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 0.75rem;
-    border: 2px solid #f3f4f6;
-    border-radius: 0.75rem;
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out;
-  }
-  
-  .buttonSecondary:hover {
-    transform: scale(1.01);
-  }
-  
-  .footer {
-    margin-top: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .footerText {
-    font-size: 1rem;
-    font-weight: 500;
-    color: black;
-  }
-  
-  .footerLink {
-    color: #7c3aed;
-    font-size: 1rem;
-    font-weight: 500;
-    margin-left: 0.5rem;
-    cursor: pointer;
-  }
-  
+.formContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  padding: 1rem;
+}
+
+.form {
+  width: 100%;
+  max-width: 700px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+}
+
+.title {
+  text-align: center;
+  font-size: 1.75rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.section {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  color: #555;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+label {
+  display: block;
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 0.75rem;
+  font-weight: 500;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  transition: border-color 0.2s;
+}
+
+input:focus,
+select:focus {
+  border-color: #4a90e2;
+  background-color: #ffffff;
+  outline: none;
+}
+
+.radioGroup {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.radioGroup label {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-weight: normal;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #4a90e2;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+  background-color: #357ab8;
+}
