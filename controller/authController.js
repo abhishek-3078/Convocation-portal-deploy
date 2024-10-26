@@ -107,4 +107,16 @@ module.exports.checkSession = (req , res)=> {
  }) 
 }
 
+// Open Authorization -> login with google
+module.exports.loginWithGoogle = (req , res)=> {
+  console.log(req.user);
+  res.redirect("/api/v1/auth/secret");
+}
+
+module.exports.secret = (req , res)=> {
+  res.json({
+    success : true
+  });
+}
+
 
