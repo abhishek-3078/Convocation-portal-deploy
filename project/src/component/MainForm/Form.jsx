@@ -108,6 +108,7 @@ const AlumniForm = ({rollNumber , batch}) => {
         photo: null,
         signature: null,
       });
+      
       setErrors({}); // Clear errors on successful submission
 
     } catch (error) {
