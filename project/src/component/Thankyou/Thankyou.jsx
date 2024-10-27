@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Result } from "antd";
-const App = () => (
+const ThankYou = () => (
   <div
     style={{
       minHeight: "100vh",
@@ -16,4 +16,4 @@ const App = () => (
     />
   </div>
 );
-export default App;
+export default ThankYou;

@@ -22,7 +22,7 @@ const RSVP = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center py-10 px-4">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center py-10 px-4" style={{ backgroundImage: "url('/background.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}>
       <div className="bg-white shadow-lg rounded-lg p-8 max-w-lg w-full">
         <h1 className="text-3xl font-semibold text-center text-gray-800 mb-6">
           Convocation RSVP Form
