@@ -9,7 +9,7 @@ return (
     title="Successfully Verified"
     subTitle="Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait."
     extra={[
-      <Button type="primary" key="console" onClick={()=> navigate(`/dashboard/main/20${batch}/${rollNumber}/form` , {state : {rollNumber : rollNumber , batch}})} >
+      <Button type="primary" key="console" onClick={()=> navigate(`/dashboard/main/${batch}/${rollNumber}/form` , {state : {rollNumber : rollNumber , batch}})} >
         Next step
       </Button>,
     ]}
