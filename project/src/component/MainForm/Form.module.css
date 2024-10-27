@@ -96,3 +96,8 @@ select:focus {
 .submitButton:hover {
   background-color: #357ab8;
 }
+
+.error {
+  color: red;
+  font-size: 0.8rem;
+}

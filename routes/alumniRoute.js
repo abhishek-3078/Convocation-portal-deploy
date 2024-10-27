@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const alumniController = require("../controller/alumniController"); // Adjust the path as necessary
 
-// Route to create a new alumni
-router.post("/", alumniController.createAlumni);
+// Route to create a new alumni with file upload handling
+router.post("/", alumniController.uploadAlumniFiles, alumniController.createAlumni);
 
 // Route to get all alumni
 router.get("/", alumniController.getAllAlumni);

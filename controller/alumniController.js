@@ -1,11 +1,42 @@
 const Alumni = require("../Model/alumni.js"); // Adjust the path as necessary
+const multer = require("multer");
+const path = require("path");
 
-// Create a new alumni
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, "uploads/"); // Save files to "uploads" directory
+    },
+    filename: function (req, file, cb) {
+        cb(null, `${Date.now()}-${file.originalname}`);
+    }
+});
+
+const upload = multer({ storage: storage });
+
+// Middleware to handle multipart form data, including files
+module.exports.uploadAlumniFiles = upload.fields([
+    { name: "photo", maxCount: 1 },
+    { name: "signature", maxCount: 1 }
+]);
+
+// Create alumni and save document with file paths
 module.exports.createAlumni = async (req, res) => {
     const { userId, ...alumniData } = req.body;
 
     try {
-        const newAlumni = new Alumni({ user: userId, ...alumniData });
+        // Get file paths for photo and signature
+        console.log(req.body);
+        const photoPath = req.files.photo ? req.files.photo[0].path : null;
+        const signaturePath = req.files.signature ? req.files.signature[0].path : null;
+
+        const newAlumni = new Alumni({
+            user: userId,
+            ...alumniData,
+            photo: photoPath,
+            signature: signaturePath
+        });
+
         await newAlumni.save();
         res.status(201).json({ message: "Alumni registered successfully!", alumni: newAlumni });
     } catch (error) {

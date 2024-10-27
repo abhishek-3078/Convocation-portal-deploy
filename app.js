@@ -12,6 +12,15 @@ const User = require("./Model/user.js");
 dotenv.config();
 const app = express();
 
+const fs = require("fs");
+const path = require("path");
+
+
+const uploadDir = path.join(__dirname, "uploads");
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir);
+}
+
 
 app.use(cors({
     origin : "http://localhost:5173" ,
@@ -58,6 +67,7 @@ passport.deserializeUser((user , done)=> {
 
 
 app.use(express.json());
+app.use("/uploads", express.static("uploads"));
 
 main();
 

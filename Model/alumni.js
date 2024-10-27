@@ -4,7 +4,6 @@ const alumniSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User", // Reference to the User model
-        required: true,
     },
     name: { type: String, required: true },
     fatherName: { type: String, required: true },

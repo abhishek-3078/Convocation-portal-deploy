@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import styles from './Form.module.css';
+import { useLocation } from 'react-router-dom';
 
-const AlumniForm = ({rollNumber , batch}) => {
+const AlumniForm = () => {
+  const {rollNumber , batch} = useLocation().state;
   const [formData, setFormData] = useState({
     name: '',
     fatherName: '',
     dob: '',
     gender: '',
+    maritalStatus: '',
     course: '',
     branch: '',
     enrollmentNo: '',
     yearOfPassing: '',
-    maritalStatus: '',
     mobile: '',
     email: '',
     currentAddress: '',
@@ -29,11 +31,11 @@ const AlumniForm = ({rollNumber , batch}) => {
     officeEmail: '',
     photo: null,
     signature: null,
-    rollNumber : rollNumber ,
-    batch : batch
+    rollNumber: rollNumber,
+    batch: "20" + batch,
   });
 
-  const [errors, setErrors] = useState({}); // To store validation errors
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
@@ -46,21 +48,18 @@ const AlumniForm = ({rollNumber , batch}) => {
 
   const validateForm = () => {
     const newErrors = {};
-    // Simple validation checks
     if (!formData.name) newErrors.name = 'Name is required.';
     if (!formData.email) newErrors.email = 'Email is required.';
     if (!formData.mobile) newErrors.mobile = 'Mobile number is required.';
     if (!formData.dob) newErrors.dob = 'Date of birth is required.';
     if (!formData.gender) newErrors.gender = 'Gender is required.';
-    // Add more validations as needed
-
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0; // returns true if no errors
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validateForm()) return; // Validate the form
+    if (!validateForm()) return;
 
     const data = new FormData();
     for (const key in formData) {
@@ -68,49 +67,48 @@ const AlumniForm = ({rollNumber , batch}) => {
     }
 
     try {
-      const response = await fetch('http:://localhost:8080/api/v1/alumni', {
+      let response = await fetch('http://localhost:8080/api/v1/alumni', {
         method: 'POST',
         body: data,
       });
-      
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log('Success:', result);
+        setFormData({
+          name: '',
+          fatherName: '',
+          dob: '',
+          gender: '',
+          maritalStatus: '',
+          course: '',
+          branch: '',
+          enrollmentNo: '',
+          yearOfPassing: '',
+          mobile: '',
+          email: '',
+          currentAddress: '',
+          permanentAddress: '',
+          fieldOfWork: '',
+          package: '',
+          occupation: '',
+          higherStudiesCourse: '',
+          specialization: '',
+          university: '',
+          universityAddress: '',
+          employer: '',
+          jobDesignation: '',
+          officePhone: '',
+          officeEmail: '',
+          photo: null,
+          signature: null,
+          rollNumber: '',
+          batch: '',
+        });
+        setErrors({});
+      } else {
+        setErrors({ submit: 'Error submitting the form, please try again.' });
       }
-
-      const result = await response.json();
-      console.log('Success:', result);
-      // Reset the form after successful submission
-      setFormData({
-        name: '',
-        fatherName: '',
-        dob: '',
-        gender: '',
-        course: '',
-        branch: '',
-        enrollmentNo: '',
-        yearOfPassing: '',
-        maritalStatus: '',
-        mobile: '',
-        email: '',
-        currentAddress: '',
-        permanentAddress: '',
-        fieldOfWork: '',
-        package: '',
-        occupation: '',
-        higherStudiesCourse: '',
-        specialization: '',
-        university: '',
-        universityAddress: '',
-        employer: '',
-        jobDesignation: '',
-        officePhone: '',
-        officeEmail: '',
-        photo: null,
-        signature: null,
-      });
-      
-      setErrors({}); // Clear errors on successful submission
-
     } catch (error) {
       console.error('Error:', error);
       setErrors({ submit: 'Error submitting the form, please try again.' });
@@ -170,6 +168,15 @@ const AlumniForm = ({rollNumber , batch}) => {
             </label>
             {errors.gender && <span className={styles.error}>{errors.gender}</span>}
           </div>
+
+          <label>Marital Status</label>
+          <select name="maritalStatus" value={formData.maritalStatus} onChange={handleChange} className={styles.select}>
+            <option value="">Select Marital Status</option>
+            <option value="Single">Single</option>
+            <option value="Married">Married</option>
+            <option value="Divorced">Divorced</option>
+            <option value="Widowed">Widowed</option>
+          </select>
         </section>
 
         {/* Academic Details Section */}
@@ -252,21 +259,24 @@ const AlumniForm = ({rollNumber , batch}) => {
           <label>Job Designation</label>
           <input type="text" name="jobDesignation" value={formData.jobDesignation} onChange={handleChange} />
 
-          <label>Office Phone</label>
-          <input type="tel" name="officePhone" value={formData.officePhone} onChange={handleChange} />
-
-          <label>Office Email</label>
-          <input type="email" name="officeEmail" value={formData.officeEmail} onChange={handleChange} />
+          <label>Package</label>
+          <select name="package" value={formData.package} onChange={handleChange} className={styles.select}>
+            <option value="">Select Package</option>
+            <option value="lessThan10L">Less than 10 lakh</option>
+            <option value="10to20L">10-20 lakh</option>
+            <option value="20to50L">20-50 lakh</option>
+            <option value="moreThan50L">More than 50 lakh</option>
+          </select>
         </section>
 
         {/* File Upload Section */}
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>Documents Upload</h2>
           <label>Photo</label>
-          <input type="file" name="photo" accept="image/*" onChange={handleChange} />
+          <input type="file" name="photo" accept="image/jpeg" onChange={handleChange} />
 
           <label>Signature</label>
-          <input type="file" name="signature" accept="image/*" onChange={handleChange} />
+          <input type="file" name="signature" accept="image/jpeg" onChange={handleChange} />
         </section>
 
         <button type="submit" className={styles.submitButton}>Submit</button>
