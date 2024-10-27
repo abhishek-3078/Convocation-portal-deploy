@@ -56,7 +56,7 @@ const AlumniForm = () => {
       const file = files[0];
       let maxSize = 0;
 
-      // Set maxSize based on the input name
+      // Set maxSize based on the input style={{padding : '10px'}} name
       if (name === "photo") {
         maxSize = 50 * 1024; // 50KB
       } else if (name === "signature") {
@@ -73,7 +73,7 @@ const AlumniForm = () => {
         }));
         return;
       } else {
-        // Clear any previous error for this input
+        // Clear any previous error for this input style={{padding : '10px'}}
         setErrors((prevErrors) => ({
           ...prevErrors,
           [name]: null,
@@ -162,8 +162,15 @@ const AlumniForm = () => {
   };
 
   return (
-    <div className={styles.formContainer} style={{ backgroundImage: "url('/background.jpeg')", backgroundSize: 'cover', backgroundPosition: 'center' }}>
-      <form className={styles.form} onSubmit={handleSubmit}>
+    <div
+      className={styles.formContainer}
+      style={{
+        backgroundImage: "url('/background.jpeg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <form className={styles.form} onSubmit={handleSubmit} style={{height : '95vh'}}>
         <h1 className={styles.title}>Alumni Registration Form</h1>
 
         {/* Personal Information Section */}
@@ -171,6 +178,7 @@ const AlumniForm = () => {
           <h2 className={styles.sectionTitle}>Personal Information</h2>
           <label>Name</label>
           <input
+            style={{ padding: "10px" }}
             type="text"
             name="name"
             value={formData.name}
@@ -180,6 +188,7 @@ const AlumniForm = () => {
 
           <label>Father&apos;s Name</label>
           <input
+            style={{ padding: "10px" }}
             type="text"
             name="fatherName"
             value={formData.fatherName}
@@ -188,6 +197,7 @@ const AlumniForm = () => {
 
           <label>Date of Birth</label>
           <input
+            style={{ padding: "10px" }}
             type="date"
             name="dob"
             value={formData.dob}
@@ -199,6 +209,7 @@ const AlumniForm = () => {
           <div className={styles.radioGroup}>
             <label>
               <input
+                style={{ padding: "10px" }}
                 type="radio"
                 name="gender"
                 value="male"
@@ -209,6 +220,7 @@ const AlumniForm = () => {
             </label>
             <label>
               <input
+                style={{ padding: "10px" }}
                 type="radio"
                 name="gender"
                 value="female"
@@ -219,6 +231,7 @@ const AlumniForm = () => {
             </label>
             <label>
               <input
+                style={{ padding: "10px" }}
                 type="radio"
                 name="gender"
                 value="other"
@@ -232,37 +245,43 @@ const AlumniForm = () => {
             )}
           </div>
 
-          <label>Marital Status</label>
-          <select
-            name="maritalStatus"
-            value={formData.maritalStatus}
-            onChange={handleChange}
-            className={styles.select}
-          >
-            <option value="">Select Marital Status</option>
-            <option value="Single">Single</option>
-            <option value="Married">Married</option>
-            <option value="Divorced">Divorced</option>
-            <option value="Widowed">Widowed</option>
-          </select>
+          <div style={{ display: "flex" }}>
+            <div>
+              <label>Marital Status</label>
+              <select
+                name="maritalStatus"
+                value={formData.maritalStatus}
+                onChange={handleChange}
+                className={styles.select}
+              >
+                <option value="">Select Marital Status</option>
+                <option value="Single">Single</option>
+                <option value="Married">Married</option>
+                <option value="Divorced">Divorced</option>
+                <option value="Widowed">Widowed</option>
+              </select>
+            </div>
 
-          <label>Blood Group</label>
-          <select
-            name="bloodGroup"
-            value={formData.bloodGroup}
-            onChange={handleChange}
-            className={styles.select}
-          >
-            <option value="">Select Blood Group</option>
-            <option value="A+">A+</option>
-            <option value="A-">A-</option>
-            <option value="B+">B+</option>
-            <option value="B-">B-</option>
-            <option value="AB+">AB+</option>
-            <option value="AB-">AB-</option>
-            <option value="O+">O+</option>
-            <option value="O-">O-</option>
-          </select>
+            <div style={{ marginLeft: "40px" }}>
+              <label>Blood Group</label>
+              <select
+                name="bloodGroup"
+                value={formData.bloodGroup}
+                onChange={handleChange}
+                className={styles.select}
+              >
+                <option value="">Select Blood Group</option>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+              </select>
+            </div>
+          </div>
         </section>
 
         {/* Academic Details Section */}
@@ -324,23 +343,30 @@ const AlumniForm = () => {
             </option>
           </select>
 
-          <label>Enrollment No</label>
-          <input
-            type="text"
-            name="enrollmentNo"
-            value={formData.enrollmentNo}
-            onChange={handleChange}
-            required
-          />
-
-          <label>Year of Passing</label>
-          <input
-            type="text"
-            name="yearOfPassing"
-            value={formData.yearOfPassing}
-            onChange={handleChange}
-            required
-          />
+          <div style={{ display: "flex" }}>
+            <div>
+              <label>Enrollment No</label>
+              <input
+                style={{ padding: "10px" }}
+                type="text"
+                name="enrollmentNo"
+                value={formData.enrollmentNo}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div style={{marginLeft : '30px'}}>
+              <label>Year of Passing</label>
+              <input
+                style={{ padding: "10px" }}
+                type="text"
+                name="yearOfPassing"
+                value={formData.yearOfPassing}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
         </section>
 
         {/* Higher Studies Section */}
@@ -350,6 +376,7 @@ const AlumniForm = () => {
           </h2>
           <label>Course Name</label>
           <input
+            style={{ padding: "10px" }}
             type="text"
             name="higherStudiesCourse"
             value={formData.higherStudiesCourse}
@@ -358,6 +385,7 @@ const AlumniForm = () => {
 
           <label>Specialization</label>
           <input
+            style={{ padding: "10px" }}
             type="text"
             name="specialization"
             value={formData.specialization}
@@ -366,6 +394,7 @@ const AlumniForm = () => {
 
           <label>University</label>
           <input
+            style={{ padding: "10px" }}
             type="text"
             name="university"
             value={formData.university}
@@ -374,6 +403,7 @@ const AlumniForm = () => {
 
           <label>University Address</label>
           <input
+            style={{ padding: "10px" }}
             type="text"
             name="universityAddress"
             value={formData.universityAddress}
@@ -386,6 +416,7 @@ const AlumniForm = () => {
           <h2 className={styles.sectionTitle}>Contact Information</h2>
           <label>Mobile No</label>
           <input
+            style={{ padding: "10px" }}
             type="tel"
             name="mobile"
             value={formData.mobile}
@@ -398,6 +429,7 @@ const AlumniForm = () => {
 
           <label>Email ID</label>
           <input
+            style={{ padding: "10px" }}
             type="email"
             name="email"
             value={formData.email}
@@ -408,6 +440,7 @@ const AlumniForm = () => {
 
           <label>Current Address</label>
           <input
+            style={{ padding: "10px" }}
             type="text"
             name="currentAddress"
             value={formData.currentAddress}
@@ -417,6 +450,7 @@ const AlumniForm = () => {
 
           <label>Permanent Address</label>
           <input
+            style={{ padding: "10px" }}
             type="text"
             name="permanentAddress"
             value={formData.permanentAddress}
@@ -447,6 +481,7 @@ const AlumniForm = () => {
             <div>
               <label>Please specify:</label>
               <input
+                style={{ padding: "10px" }}
                 type="text"
                 name="employmentStatusOther"
                 value={formData.employmentStatusOther}
@@ -457,6 +492,7 @@ const AlumniForm = () => {
 
           <label>Field of Work</label>
           <input
+            style={{ padding: "10px" }}
             type="text"
             name="fieldOfWork"
             value={formData.fieldOfWork}
@@ -465,6 +501,7 @@ const AlumniForm = () => {
 
           <label>Current Occupation</label>
           <input
+            style={{ padding: "10px" }}
             type="text"
             name="occupation"
             value={formData.occupation}
@@ -473,6 +510,7 @@ const AlumniForm = () => {
 
           <label>Employer</label>
           <input
+            style={{ padding: "10px" }}
             type="text"
             name="employer"
             value={formData.employer}
@@ -483,6 +521,7 @@ const AlumniForm = () => {
             Job Designation<sup>#</sup>
           </label>
           <input
+            style={{ padding: "10px" }}
             type="text"
             name="jobDesignation"
             value={formData.jobDesignation}
@@ -512,6 +551,7 @@ const AlumniForm = () => {
           <h2 className={styles.sectionTitle}>Documents Upload</h2>
           <label>Photo</label>
           <input
+            style={{ padding: "10px" }}
             type="file"
             name="photo"
             accept="image/jpeg"
@@ -521,6 +561,7 @@ const AlumniForm = () => {
 
           <label>Signature</label>
           <input
+            style={{ padding: "10px" }}
             type="file"
             name="signature"
             accept="image/jpeg"
@@ -531,7 +572,7 @@ const AlumniForm = () => {
           )}
         </section>
 
-        <button type="submit" className={styles.submitButton}>
+        <button type="submit" className={styles.submitButton} style={{backgroundColor : '#C21717'}}>
           Submit
         </button>
         {errors.submit && <span className={styles.error}>{errors.submit}</span>}
