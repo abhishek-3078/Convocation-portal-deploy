@@ -120,7 +120,7 @@ const PaymentProof = () => {
 
           <button
             type="submit"
-            className={`w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg shadow-md transition-all ${
+            className={`w-full bg-[#C21717] text-white font-semibold py-3 rounded-lg shadow-md transition-all ${
               loading ? "opacity-70 cursor-wait" : ""
             }`}
             disabled={loading} // Disable button during loading
