@@ -1,7 +1,7 @@
 import './App.css'
 import Login from "./component/Login/Login.jsx"
 import Main from './component/Main'
-import {Routes , Route, useLocation} from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Signup from './component/SignUp/Signup.jsx';
 import Page from './component/Page';
 import Private from './component/Routes/Private';
@@ -20,9 +20,9 @@ function App() {
     // Check if there's a token in local storage
     const storedAuth = localStorage.getItem("auth");
     if (storedAuth) {
-        const token = JSON.parse(storedAuth);
-        console.log("token aaya hai:",token)
-        setAuth((prev) => ({ ...prev, token }));
+      const token = JSON.parse(storedAuth);
+      console.log("token aaya hai:", token)
+      setAuth((prev) => ({ ...prev, token }));
     } else {
         // If no token in local storage, check URL params
         const params = new URLSearchParams(window.location.search);
@@ -33,7 +33,7 @@ function App() {
             setAuth((prev) => ({ ...prev, token: tokenFromUrl }));
         }
     }
-}, []); // Dependency array to run on mount only
+  }, []); // Dependency array to run on mount only
 
   return (
     <>
