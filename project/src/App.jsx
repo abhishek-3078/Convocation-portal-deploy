@@ -30,11 +30,7 @@ function App() {
         const tokenFromUrl = params.get('token');
         console.log("token aaya hai:",tokenFromUrl)
         if (tokenFromUrl) {
-<<<<<<< HEAD
-            localStorage.setItem("auth", JSON.stringify({token : tokenFromUrl}));
-=======
             localStorage.setItem("auth", {token:JSON.stringify(tokenFromUrl)});
->>>>>>> d3df84c5304b2b0866b89373d4fd5e3d2a7b3b01
             setAuth((prev) => ({ ...prev, token: tokenFromUrl }));
         }
     }
@@ -57,9 +53,9 @@ function App() {
           <Route path="main/2022/:rollNumber/form" element={<Form/>} />
           <Route path="main/2023/:rollNumber/form" element={<Form/>} />
           <Route path="main/2024/:rollNumber/form" element={<Form/>} />
-          {/* <Route path="*" element={<Page/>} /> */}
+          <Route path="*" element={<Page/>} />
         </Route>
-        {/* <Route path="*" element={<Page/>} /> */}
+        <Route path="*" element={<Page/>} />
       </Routes>
     </>
   )

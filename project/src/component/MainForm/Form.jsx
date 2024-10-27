@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import styles from './Form.module.css';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/auth';
 
 const AlumniForm = () => {
-<<<<<<< HEAD
-  const { rollNumber, batch } = useLocation().state;
-=======
   const {rollNumber , batch} = useLocation().state;
-  const [auth,setAuth]=useAuth()
->>>>>>> d3df84c5304b2b0866b89373d4fd5e3d2a7b3b01
+  const [auth,setAuth]=useAuth();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     fatherName: '',
@@ -84,8 +81,6 @@ const AlumniForm = () => {
       if (response.ok) {
         const result = await response.json();
         console.log('Success:', result);
-<<<<<<< HEAD
-=======
         // setFormData({
         //   name: '',
         //   fatherName: '',
@@ -116,8 +111,8 @@ const AlumniForm = () => {
         //   rollNumber: '',
         //   batch: '',
         // });
->>>>>>> d3df84c5304b2b0866b89373d4fd5e3d2a7b3b01
         setErrors({});
+        navigate("/dashboard/rsvp");
       } else {
         setErrors({ submit: 'Error submitting the form, please try again.' });
       }
