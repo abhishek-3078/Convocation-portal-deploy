@@ -3,11 +3,9 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { Helmet } from "react-helmet";
 import { Toaster } from "react-hot-toast";
-import Lottie from "lottie-react";
-import animationData from "../helper/animation1.json";
+// import myImage from "../assets/your-image.png"; // Update the path to your image
 
 const Layout = ({ children, title, description, keywords, author }) => {
-  
   return (
     <div>
       <Helmet>
@@ -17,16 +15,16 @@ const Layout = ({ children, title, description, keywords, author }) => {
         <meta name="keywords" content={keywords} />
         <meta name="author" content={author} />
       </Helmet>
-      <Header></Header>
-      <main style={{ minHeight: "70vh" , overflow : "hidden"}}>
+      {/* <Header></Header> */}
+      <main style={{ minHeight: "70vh", overflow: "hidden" }}>
         <Toaster />
         <div className="flex w-full">
           <div className="w-full flex items-center justify-center lg:w-1/2">
-          {children}
+            {children}
           </div>
           <div className="hidden relative lg:flex h-full w-1/2 bg-gray-200 items-center justify-center">
-            {/* <div className="w-60 h-60 bg-gradient-to-tr from-violet-500 to-pink-500 rounded-full animate-spin" /> */}
-            <Lottie style={{height:"100vh" , backgroundColor:"#111"}} animationData={animationData}/>
+            {/* Replace the Lottie component with an image */}
+            <img src='/GoldenJubilee.jpg' alt="Descriptive Alt Text" style={{ height: "100vh", width: "auto", backgroundColor: "#111" }} />
             {/* <div className="w-full h-1/2 absolute bottom-0 bg-white/10 backdrop-blur-lg" /> */}
           </div>
         </div>
@@ -36,7 +34,7 @@ const Layout = ({ children, title, description, keywords, author }) => {
   );
 };
 
-//  These are default props
+// These are default props
 Layout.defaultProps = {
   title: "Convocation-Portal",
   description: "Convocation-Portal",

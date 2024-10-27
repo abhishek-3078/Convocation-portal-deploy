@@ -1,21 +1,55 @@
-import React from 'react'
-import {useNavigate} from "react-router-dom";
-import { AntDesignOutlined, UserOutlined } from '@ant-design/icons';
-import { Avatar, Divider, Tooltip } from 'antd';
+import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import Layout from '../Layout/Layout';
-import styles from "./Batch.module.css"
 
 const Batch = () => {
+  const [selectedBatch, setSelectedBatch] = useState(null);
   const navigate = useNavigate();
+
+  const handleSelectBatch = (batch) => {
+    setSelectedBatch(batch);
+  };
+
+  const handleSubmit = () => {
+    if (selectedBatch) {
+      navigate(`/dashboard/main/${selectedBatch}`, { state: { batch: selectedBatch } });
+    }
+  };
+
   return (
     <Layout>
-      <div className={styles.container}>
-        <button className={styles.button} onClick={()=> navigate("/dashboard/main/2022" , {state : {batch : 22}})}>Batch 2022</button>
-        <button className={styles.button} onClick={()=> navigate("/dashboard/main/2023" , {state : {batch : 23}})}>Batch 2023</button>
-        <button className={styles.button} onClick={()=> navigate("/dashboard/main/2024" , {state : {batch : 24}})}>Batch 2024</button>
+      <div className="flex flex-col items-center mt-8">
+        <h1 className="text-2xl font-bold mb-4">Select Your Graduating Year</h1>
+        <div className="flex gap-6">
+          <button
+            className={`flex items-center justify-center p-8 text-lg font-bold text-gray-800 bg-white border border-gray-300 rounded-xl cursor-pointer shadow-md transition-transform duration-200 ease-in-out w-36 h-30 ${selectedBatch === 2022 ? 'bg-red-100' : ''}`} // lighter red
+            onClick={() => handleSelectBatch(2022)}
+          >
+            Batch 2022
+          </button>
+          <button
+            className={`flex items-center justify-center p-8 text-lg font-bold text-gray-800 bg-white border border-gray-300 rounded-xl cursor-pointer shadow-md transition-transform duration-200 ease-in-out w-36 h-30 ${selectedBatch === 2023 ? 'bg-red-100' : ''}`} // lighter red
+            onClick={() => handleSelectBatch(2023)}
+          >
+            Batch 2023
+          </button>
+          <button
+            className={`flex items-center justify-center p-8 text-lg font-bold text-gray-800 bg-white border border-gray-300 rounded-xl cursor-pointer shadow-md transition-transform duration-200 ease-in-out w-36 h-30 ${selectedBatch === 2024 ? 'bg-red-100' : ''}`} // lighter red
+            onClick={() => handleSelectBatch(2024)}
+          >
+            Batch 2024
+          </button>
+        </div>
+        <button
+          onClick={handleSubmit}
+          disabled={!selectedBatch} // Disable button if no batch is selected
+          className={`mt-4 flex items-center justify-center p-4 text-lg font-bold text-white border border-red-600 rounded-lg cursor-pointer shadow-md transition-transform duration-200 ease-in-out focus:outline-none focus:ring-4 focus:ring-red-400 ${!selectedBatch ? 'bg-gray-400 cursor-not-allowed' : 'bg-red-600 hover:bg-red-700'}`} // dark red and hover state
+        >
+          Submit
+        </button>
       </div>
     </Layout>
-  )
+  );
 }
 
-export default Batch
+export default Batch;
