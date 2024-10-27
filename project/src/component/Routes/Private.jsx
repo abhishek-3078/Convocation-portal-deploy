@@ -10,7 +10,7 @@ const Private = () => {
       const init = async () => {
         try {
           let response = await fetch(
-            "http://localhost:8080/api/v1/auth/get-session",
+            "https://convocation-portal-2.onrender.com/api/v1/auth/get-session",
             {
               method: "GET" ,
               headers : {

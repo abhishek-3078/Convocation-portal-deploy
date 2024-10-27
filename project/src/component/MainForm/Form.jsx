@@ -100,7 +100,7 @@ const AlumniForm = () => {
     }
 
     try {
-      let response = await fetch('http://localhost:8080/api/v1/alumni?folder=profile', {
+      let response = await fetch('https://convocation-portal-2.onrender.com/api/v1/alumni?folder=profile', {
         method: 'POST',
         headers:{
           "Authorization" : auth?.token
