@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import styles from './Form.module.css';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/auth';
 
 const AlumniForm = () => {
   const {rollNumber , batch} = useLocation().state;
-  const [auth,setAuth]=useAuth()
+  const [auth,setAuth]=useAuth();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     fatherName: '',
@@ -34,7 +35,7 @@ const AlumniForm = () => {
     photo: null,
     signature: null,
     rollNumber: rollNumber,
-    batch: "20" + batch,
+    batch: batch,
     
     department: "",
     bloodGroup: "",
@@ -141,6 +142,7 @@ const AlumniForm = () => {
         //   batch: '',
         // });
         setErrors({});
+        navigate("/dashboard/rsvp");
       } else {
         setErrors({ submit: 'Error submitting the form, please try again.' });
       }

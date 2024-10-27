@@ -19,7 +19,7 @@ const Form = () => {
 
     setLoading(true);
     try {
-      let response = await fetch('http://localhost:8080/api/v1/auth/login', {
+      let response = await fetch('http://localhost:8080/api/v1/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ const Form = () => {
         if (response.success) {
           setAuth({ ...auth, token: response.token });
           localStorage.setItem('auth', JSON.stringify({ token: response.token }));
-          navigate('/dashboard/main');
+          navigate('/');
         } else {
           toast.error('You are not registered');
         }
