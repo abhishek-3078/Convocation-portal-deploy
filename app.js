@@ -49,7 +49,7 @@ app.use(passport.session()); // used to persist session
 passport.use(new googleStrategy({
     clientID : process.env.GOOGLE_CLIENT_ID ,
     clientSecret : process.env.GOOGLE_CLIENT_SECRET ,
-    callbackURL : 'http://localhost:8080/api/v1/auth/google/callback'
+    callbackURL : 'https://convocation-portal-2.onrender.com/api/v1/auth/google/callback'
 } , 
 (accessToken , refreshToken , profile , done)=> {
     console.log(accessToken);

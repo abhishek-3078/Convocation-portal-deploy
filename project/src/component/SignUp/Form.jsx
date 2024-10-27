@@ -45,7 +45,7 @@ const Form = () => {
   };
 
   const handleGoogle = async () => {
-    window.location.href = 'http://localhost:8080/api/v1/auth/google';
+    window.location.href = 'https://convocation-portal-2.onrender.com/api/v1/auth/google';
   };
 
   return (
