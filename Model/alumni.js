@@ -18,9 +18,11 @@ const alumniSchema = new mongoose.Schema({
     email: { type: String, required: true },
     currentAddress: { type: String, required: true },
     permanentAddress: { type: String, required: true },
-    fieldOfWork: { type: String, required: true },
-    package: { type: String, required: true },
-    occupation: { type: String, required: true },
+    
+    fieldOfWork: { type: String},
+    package: { type: String},
+    occupation: { type: String},
+    
     higherStudiesCourse: { type: String },
     specialization: { type: String },
     university: { type: String },
@@ -36,7 +38,12 @@ const alumniSchema = new mongoose.Schema({
     receiptFileName: { type: String }, // Use String to store the file path or URL,
     receiptUrl: { type: String }, // Use
     rollNumber : {type : String , required : true , unique : true} ,
-    batch : {type : String}
+    batch : {type : String} ,
+    
+    department : {type: String , required : true} ,
+    bloodGroup : {type: String , required : true} ,
+    employmentStatus : {type: String, required : true} ,
+    jobs : {type : String}
 });
 
 // Export Alumni model
