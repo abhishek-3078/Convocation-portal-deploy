@@ -9,7 +9,7 @@ const store = require("connect-mongo");
 const authRoute = require("./routes/authRoute.js");
 dotenv.config();
 const app = express();
-
+ 
 
 app.use(cors({
     origin : "http://localhost:5173" ,
@@ -28,6 +28,7 @@ app.use(session({
         mongoUrl : process.env.url
     })
 }));
+const uploadRoutes = require('./routes/upload');
 
 app.use(passport.initialize()); // used to initialise passport
 app.use(passport.session()); // used to persist session
@@ -60,6 +61,9 @@ main();
 
 
 app.use("/api/v1/auth" , authRoute);
+
+
+app.use('/upload', uploadRoutes);
 
 
 app.listen(process.env.PORT , ()=> {

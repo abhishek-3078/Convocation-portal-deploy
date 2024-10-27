@@ -9,6 +9,14 @@ const userSchema = new mongoose.Schema({
     password : {
         type : String ,
         required : true
+    },
+    profilePhotoName:{
+        type:String,
+        default:""
+    },
+    profileUrl:{
+        type:String,
+        default:null
     }
 });
 
