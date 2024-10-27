@@ -14,7 +14,7 @@ const AuthProvider = ({ children }) => {
                 const parsedData = JSON.parse(data);
                 if (parsedData) {
                     setAuth({
-                        token: parsedData
+                        token: parsedData.token
                     });
                 }
             }

@@ -29,8 +29,8 @@ const alumniSchema = new mongoose.Schema({
     jobDesignation: { type: String },
     officePhone: { type: String },
     officeEmail: { type: String },
-    photo: { type: String }, // Use String to store the file path or URL
-    signature: { type: String }, // Use String to store the file path or URL,
+    photo: { type: String , required : true}, // Use String to store the file path or URL
+    signature: { type: String , required : true}, // Use String to store the file path or URL,
     rollNumber : {type : String , required : true , unique : true} ,
     batch : {type : String}
 });

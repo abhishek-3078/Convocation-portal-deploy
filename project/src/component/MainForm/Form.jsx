@@ -3,7 +3,7 @@ import styles from './Form.module.css';
 import { useLocation } from 'react-router-dom';
 
 const AlumniForm = () => {
-  const {rollNumber , batch} = useLocation().state;
+  const { rollNumber, batch } = useLocation().state;
   const [formData, setFormData] = useState({
     name: '',
     fatherName: '',
@@ -75,36 +75,6 @@ const AlumniForm = () => {
       if (response.ok) {
         const result = await response.json();
         console.log('Success:', result);
-        setFormData({
-          name: '',
-          fatherName: '',
-          dob: '',
-          gender: '',
-          maritalStatus: '',
-          course: '',
-          branch: '',
-          enrollmentNo: '',
-          yearOfPassing: '',
-          mobile: '',
-          email: '',
-          currentAddress: '',
-          permanentAddress: '',
-          fieldOfWork: '',
-          package: '',
-          occupation: '',
-          higherStudiesCourse: '',
-          specialization: '',
-          university: '',
-          universityAddress: '',
-          employer: '',
-          jobDesignation: '',
-          officePhone: '',
-          officeEmail: '',
-          photo: null,
-          signature: null,
-          rollNumber: '',
-          batch: '',
-        });
         setErrors({});
       } else {
         setErrors({ submit: 'Error submitting the form, please try again.' });
@@ -126,6 +96,10 @@ const AlumniForm = () => {
           <label>Name</label>
           <input type="text" name="name" value={formData.name} onChange={handleChange} />
           {errors.name && <span className={styles.error}>{errors.name}</span>}
+
+          <label>Roll Number</label>
+          <input type="text" name="rollNumber" value={rollNumber} disabled />
+          
 
           <label>Father's Name</label>
           <input type="text" name="fatherName" value={formData.fatherName} onChange={handleChange} />
@@ -166,8 +140,8 @@ const AlumniForm = () => {
               />
               Other
             </label>
-            {errors.gender && <span className={styles.error}>{errors.gender}</span>}
           </div>
+          {errors.gender && <span className={styles.error}>{errors.gender}</span>}
 
           <label>Marital Status</label>
           <select name="maritalStatus" value={formData.maritalStatus} onChange={handleChange} className={styles.select}>
@@ -205,7 +179,7 @@ const AlumniForm = () => {
 
           <label>Enrollment No</label>
           <input type="text" name="enrollmentNo" value={formData.enrollmentNo} onChange={handleChange} required />
-
+          
           <label>Year of Passing</label>
           <input type="text" name="yearOfPassing" value={formData.yearOfPassing} onChange={handleChange} required />
         </section>
@@ -258,6 +232,12 @@ const AlumniForm = () => {
 
           <label>Job Designation</label>
           <input type="text" name="jobDesignation" value={formData.jobDesignation} onChange={handleChange} />
+
+          <label>Office Phone</label>
+          <input type="tel" name="officePhone" value={formData.officePhone} onChange={handleChange} />
+
+          <label>Office Email</label>
+          <input type="email" name="officeEmail" value={formData.officeEmail} onChange={handleChange} />
 
           <label>Package</label>
           <select name="package" value={formData.package} onChange={handleChange} className={styles.select}>

@@ -27,7 +27,7 @@ function App() {
         const params = new URLSearchParams(window.location.search);
         const tokenFromUrl = params.get('token');
         if (tokenFromUrl) {
-            localStorage.setItem("auth", JSON.stringify(tokenFromUrl));
+            localStorage.setItem("auth", JSON.stringify({token : tokenFromUrl}));
             setAuth((prev) => ({ ...prev, token: tokenFromUrl }));
         }
     }
