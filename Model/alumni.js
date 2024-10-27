@@ -18,9 +18,11 @@ const alumniSchema = new mongoose.Schema({
     email: { type: String, required: true },
     currentAddress: { type: String, required: true },
     permanentAddress: { type: String, required: true },
-    fieldOfWork: { type: String, required: true },
-    package: { type: String, required: true },
-    occupation: { type: String, required: true },
+    
+    fieldOfWork: { type: String},
+    package: { type: String},
+    occupation: { type: String},
+    
     higherStudiesCourse: { type: String },
     specialization: { type: String },
     university: { type: String },
@@ -29,19 +31,19 @@ const alumniSchema = new mongoose.Schema({
     jobDesignation: { type: String },
     officePhone: { type: String },
     officeEmail: { type: String },
-<<<<<<< HEAD
-    photo: { type: String , required : true}, // Use String to store the file path or URL
-    signature: { type: String , required : true}, // Use String to store the file path or URL,
-=======
     photo: { type: String ,required:true}, // Use String to store the file path or URL,
     photoFileName: { type: String }, // Use String to store the file path or URL,
     signature: { type: String,required:true }, // Use String to store the file path or URL,
     signatureFileName: { type: String }, // Use String to store the file path or URL,
     receiptFileName: { type: String }, // Use String to store the file path or URL,
     receiptUrl: { type: String }, // Use
->>>>>>> d3df84c5304b2b0866b89373d4fd5e3d2a7b3b01
     rollNumber : {type : String , required : true , unique : true} ,
-    batch : {type : String}
+    batch : {type : String} ,
+    
+    department : {type: String , required : true} ,
+    bloodGroup : {type: String , required : true} ,
+    employmentStatus : {type: String, required : true} ,
+    jobs : {type : String}
 });
 
 // Export Alumni model

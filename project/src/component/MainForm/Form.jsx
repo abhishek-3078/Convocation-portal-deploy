@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import styles from './Form.module.css';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useAuth } from '../context/auth';
 
 const AlumniForm = () => {
   const {rollNumber , batch} = useLocation().state;
-  const [auth,setAuth]=useAuth();
-  const navigate = useNavigate();
+  const [auth,setAuth]=useAuth()
   const [formData, setFormData] = useState({
     name: '',
     fatherName: '',
@@ -36,6 +35,11 @@ const AlumniForm = () => {
     signature: null,
     rollNumber: rollNumber,
     batch: "20" + batch,
+    
+    department: "",
+    bloodGroup: "",
+    employmentStatus: "",
+    jobs: ""
   });
 
   const [errors, setErrors] = useState({});
@@ -112,7 +116,6 @@ const AlumniForm = () => {
         //   batch: '',
         // });
         setErrors({});
-        navigate("/dashboard/rsvp");
       } else {
         setErrors({ submit: 'Error submitting the form, please try again.' });
       }
@@ -134,11 +137,7 @@ const AlumniForm = () => {
           <input type="text" name="name" value={formData.name} onChange={handleChange} />
           {errors.name && <span className={styles.error}>{errors.name}</span>}
 
-          <label>Roll Number</label>
-          <input type="text" name="rollNumber" value={rollNumber} disabled />
-          
-
-          <label>Father's Name</label>
+          <label>Father&apos;s Name</label>
           <input type="text" name="fatherName" value={formData.fatherName} onChange={handleChange} />
 
           <label>Date of Birth</label>
@@ -177,8 +176,8 @@ const AlumniForm = () => {
               />
               Other
             </label>
+            {errors.gender && <span className={styles.error}>{errors.gender}</span>}
           </div>
-          {errors.gender && <span className={styles.error}>{errors.gender}</span>}
 
           <label>Marital Status</label>
           <select name="maritalStatus" value={formData.maritalStatus} onChange={handleChange} className={styles.select}>
@@ -187,6 +186,19 @@ const AlumniForm = () => {
             <option value="Married">Married</option>
             <option value="Divorced">Divorced</option>
             <option value="Widowed">Widowed</option>
+          </select>
+
+          <label>Blood Group</label>
+          <select name="bloodGroup" value={formData.bloodGroup} onChange={handleChange} className={styles.select}>
+            <option value="">Select Blood Group</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
           </select>
         </section>
 
@@ -200,6 +212,16 @@ const AlumniForm = () => {
             <option value="MBA">MBA</option>
             <option value="MTech">MTech</option>
             <option value="MCA">MCA</option>
+          </select>
+
+          <label>Department</label>
+          <select name="department" value={formData.department} onChange={handleChange} className={styles.select}>
+            <option value = "">Select Department</option>
+            <option value = "Computer Department">Computer Department</option>
+            <option value = "Civil Department">Civil Department</option>
+            <option value = "Mechanical Department">Mechanical Department</option>
+            <option value = "Electrical Department">Electrical Department</option>
+            <option value = "Electronics and Communication Department">Electronics and Communication Department</option>
           </select>
 
           <label>Branch</label>
@@ -216,7 +238,7 @@ const AlumniForm = () => {
 
           <label>Enrollment No</label>
           <input type="text" name="enrollmentNo" value={formData.enrollmentNo} onChange={handleChange} required />
-          
+
           <label>Year of Passing</label>
           <input type="text" name="yearOfPassing" value={formData.yearOfPassing} onChange={handleChange} required />
         </section>
@@ -258,6 +280,28 @@ const AlumniForm = () => {
         {/* Professional Details Section */}
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>Professional Details</h2>
+          <label>Employment Status</label>
+          <select name="employmentStatus" value={formData.employmentStatus} onChange={handleChange} className={styles.select}>
+            <option value="">Select Employment Status</option>
+            <option value="Employed">Employed</option>
+            <option value="Self Employed">Self Employed</option>
+            <option value="Unemployed">Unemployed</option>
+            <option value="Other">Other</option>
+          </select>
+
+          {/* Conditionally render the text box if "Other" is selected */}
+          {formData.employmentStatus === "Other" && (
+            <div>
+              <label>Please specify:</label>
+              <input
+                type="text"
+                name="employmentStatusOther"
+                value={formData.employmentStatusOther}
+                onChange={handleChange}
+              />
+            </div>
+          )}
+
           <label>Field of Work</label>
           <input type="text" name="fieldOfWork" value={formData.fieldOfWork} onChange={handleChange} />
 
@@ -267,14 +311,10 @@ const AlumniForm = () => {
           <label>Employer</label>
           <input type="text" name="employer" value={formData.employer} onChange={handleChange} />
 
-          <label>Job Designation</label>
+          <label>Job Designation<sup>#</sup></label>
           <input type="text" name="jobDesignation" value={formData.jobDesignation} onChange={handleChange} />
+          <p><sup>#</sup> Separate with comma for multiple designations</p>
 
-          <label>Office Phone</label>
-          <input type="tel" name="officePhone" value={formData.officePhone} onChange={handleChange} />
-
-          <label>Office Email</label>
-          <input type="email" name="officeEmail" value={formData.officeEmail} onChange={handleChange} />
 
           <label>Package</label>
           <select name="package" value={formData.package} onChange={handleChange} className={styles.select}>
