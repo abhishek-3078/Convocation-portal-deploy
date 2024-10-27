@@ -252,7 +252,7 @@ const AlumniForm = () => {
           <label>Branch</label>
           <select name="branch" value={formData.branch} onChange={handleChange} className={styles.select}>
             <option value="">Select Branch</option>
-            <option value="Computer Science">Computer Science</option>
+            <option value="Computer Science">Computer Science and Engineering</option>
             <option value="Information Technology">Information Technology</option>
             <option value="Civil">Civil</option>
             <option value="Mechanical">Mechanical</option>
