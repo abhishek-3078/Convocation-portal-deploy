@@ -21,7 +21,7 @@ const MainForm = () => {
 
     setLoading(true);
     try {
-      if (rollNumber.length > 2 && parseInt(rollNumber[1] + rollNumber[2]) === batch){
+      if (rollNumber.length > 2 && (parseInt(rollNumber[1] + rollNumber[2]) + 4) === batch){
         setResult(true);
       }
       else {

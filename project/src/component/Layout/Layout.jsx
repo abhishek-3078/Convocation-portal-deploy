@@ -18,8 +18,7 @@ const Layout = ({ children, title, description, keywords, author }) => {
         <meta name="author" content={author} />
       </Helmet>
       <Header></Header>
-      <main style={{ minHeight: "70vh" , overflow : "hidden"}}>
-        <Toaster />
+      <main style={{ maxHeight: "90vh" , overflow : "hidden"}}>
         <div className="flex w-full">
           <div className="w-full flex items-center justify-center lg:w-1/2">
           {children}

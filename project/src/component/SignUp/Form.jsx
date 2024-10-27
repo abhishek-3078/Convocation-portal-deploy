@@ -131,7 +131,7 @@ const Form = () => {
           className="text-violet-500 text-base font-medium ml-2"
           onClick={() => navigate("/")}
         >
-          Sign In
+          Sign Up
         </button>
       </div>
     </div>
