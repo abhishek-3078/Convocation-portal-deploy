@@ -29,17 +29,12 @@ const alumniSchema = new mongoose.Schema({
     jobDesignation: { type: String },
     officePhone: { type: String },
     officeEmail: { type: String },
-<<<<<<< HEAD
-    photo: { type: String , required : true}, // Use String to store the file path or URL
-    signature: { type: String , required : true}, // Use String to store the file path or URL,
-=======
     photo: { type: String ,required:true}, // Use String to store the file path or URL,
     photoFileName: { type: String }, // Use String to store the file path or URL,
     signature: { type: String,required:true }, // Use String to store the file path or URL,
     signatureFileName: { type: String }, // Use String to store the file path or URL,
     receiptFileName: { type: String }, // Use String to store the file path or URL,
     receiptUrl: { type: String }, // Use
->>>>>>> d3df84c5304b2b0866b89373d4fd5e3d2a7b3b01
     rollNumber : {type : String , required : true , unique : true} ,
     batch : {type : String}
 });

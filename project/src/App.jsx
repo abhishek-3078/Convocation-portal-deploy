@@ -12,11 +12,10 @@ import { useEffect } from 'react';
 import { useAuth } from './component/context/auth';
 import RSVP from './component/SecondaryForms/rsvp.jsx';
 import PaymentProof from './component/SecondaryForms/SBICollect.jsx';
+import Thankyou from './component/Thankyou/Thankyou';
 
 function App() {
   const [auth , setAuth] = useAuth();
-  const location = useLocation();
-  // console.log(location)
   useEffect(() => {
     // Check if there's a token in local storage
     const storedAuth = localStorage.getItem("auth");
@@ -28,7 +27,7 @@ function App() {
         // If no token in local storage, check URL params
         const params = new URLSearchParams(window.location.search);
         const tokenFromUrl = params.get('token');
-        console.log("token aaya hai:",tokenFromUrl)
+        console.log("token aaya hai:",tokenFromUrl);
         if (tokenFromUrl) {
             localStorage.setItem("auth", {token:JSON.stringify(tokenFromUrl)});
             setAuth((prev) => ({ ...prev, token: tokenFromUrl }));
@@ -44,6 +43,8 @@ function App() {
         <Route path='dashboard/*' element={<Private/>} >
         <Route path="rsvp" element={<RSVP/>} />
         <Route path="sbicollect" element={<PaymentProof/>} />
+        <Route path="thankyou" element={<Thankyou/>} />
+
         
         {/* <Route path='dashboard/*' > */}
           <Route path="main" element={<Batch/>} />
