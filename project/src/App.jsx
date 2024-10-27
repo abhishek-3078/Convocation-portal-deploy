@@ -41,10 +41,12 @@ function App() {
       <Routes>
         <Route path='/' element={<Login/>} /> 
         <Route path='/signup' element={<Signup/>} />
+        <Route path="Main" element={<Batch/>} />
         <Route path='dashboard/*' element={<Private/>} >
         <Route path="rsvp" element={<RSVP/>} />
         <Route path="sbicollect" element={<PaymentProof/>} />
         <Route path="thankyou" element={<Thankyou/>} />
+        
 
         <Route path="invitation" element={<PdfGenerator/>} />
         
