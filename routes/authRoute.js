@@ -10,7 +10,7 @@ router.post("/login"  , authController.login);
 router.get("/get-session" , isAuth , authController.checkSession);
 router.get("/google" , passport.authenticate("google" , {scope : ["email" , "profile"]}));
 router.get("/google/callback" , passport.authenticate("google") , authController.loginWithGoogle);
-router.get("/secret" , isAuth , authController.secret);
+router.get("/secret" , authController.secret);
 
 
 module.exports = router;

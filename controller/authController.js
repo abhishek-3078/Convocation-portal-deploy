@@ -82,7 +82,7 @@ module.exports.login = async (req, res) => {
         })
     }
 
-    const token = await jwt.sign({id : user._id} , process.env.token , {expiresIn : "7d"});
+    const token = await jwt.sign({id : user._id} , process.env.JWT_SECRET , {expiresIn : "7d"});
     
     return res.json({
         success : true , 
@@ -108,10 +108,35 @@ module.exports.checkSession = (req , res)=> {
 }
 
 // Open Authorization -> login with google
-module.exports.loginWithGoogle = (req , res)=> {
-  console.log(req.user);
-  res.redirect("/api/v1/auth/secret");
-}
+module.exports.loginWithGoogle = async (req, res) => {
+  try {
+    const email = req.user.emails[0].value;
+    const user = await User.findOne({ email });
+
+    let token;
+    if (user) {
+      // User already exists, generate a token
+      token = await jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
+    } else {
+      // If user doesn't exist, create a new user
+      const newUser = new User({ email });
+      await newUser.save();
+      token = await jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
+    }
+
+    // Redirect to the frontend with the token
+    const redirectURL = `http://localhost:5173/dashboard/main?token=${token}`;
+    return res.redirect(redirectURL);
+
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+
 
 module.exports.secret = (req , res)=> {
   res.json({

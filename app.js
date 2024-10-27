@@ -7,9 +7,20 @@ const googleStrategy = require("passport-google-oauth20");
 const session = require("express-session");
 const store = require("connect-mongo");
 const authRoute = require("./routes/authRoute.js");
+const alumniRoute = require("./routes/alumniRoute.js");
+const User = require("./Model/user.js");
 dotenv.config();
 const app = express();
- 
+
+const fs = require("fs");
+const path = require("path");
+
+
+const uploadDir = path.join(__dirname, "uploads");
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir);
+}
+
 
 app.use(cors({
     origin : "http://localhost:5173" ,
@@ -41,6 +52,7 @@ passport.use(new googleStrategy({
     callbackURL : 'http://localhost:8080/api/v1/auth/google/callback'
 } , 
 (accessToken , refreshToken , profile , done)=> {
+    console.log(accessToken);
     done(null , profile); // passes the profile data to serializeUser
 }));
 
@@ -56,11 +68,13 @@ passport.deserializeUser((user , done)=> {
 
 
 app.use(express.json());
+app.use("/uploads", express.static("uploads"));
 
 main();
 
 
 app.use("/api/v1/auth" , authRoute);
+app.use("/api/v1/alumni" , alumniRoute);
 
 
 app.use('/upload', uploadRoutes);
