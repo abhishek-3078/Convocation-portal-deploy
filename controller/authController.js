@@ -124,6 +124,8 @@ module.exports.loginWithGoogle = async (req, res) => {
       token = await jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
     }
 
+    console.log("token aa gya:",token)
+
     // Redirect to the frontend with the token
     const redirectURL = `http://localhost:5173/dashboard/main?token=${token}`;
     return res.redirect(redirectURL);

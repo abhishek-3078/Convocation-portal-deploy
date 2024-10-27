@@ -39,6 +39,7 @@ app.use(session({
         mongoUrl : process.env.url
     })
 }));
+const uploadRoutes = require('./routes/upload');
 
 app.use(passport.initialize()); // used to initialise passport
 app.use(passport.session()); // used to persist session
@@ -70,10 +71,15 @@ app.use(express.json());
 app.use("/uploads", express.static("uploads"));
 
 main();
-
+app.get("/" , (req , res)=> {
+    res.send("Hello");
+});
 
 app.use("/api/v1/auth" , authRoute);
 app.use("/api/v1/alumni" , alumniRoute);
+
+
+app.use('/upload', uploadRoutes);
 
 
 app.listen(process.env.PORT , ()=> {

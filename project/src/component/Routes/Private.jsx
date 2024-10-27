@@ -18,7 +18,7 @@ const Private = () => {
               }
             }
           );
-  
+          console.log("if response was ok:",response)
           if (response.ok){
             response = await response.json();
             console.log(response);

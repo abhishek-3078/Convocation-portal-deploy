@@ -10,7 +10,8 @@ import MainForm from './component/MainForm/MainForm';
 import Form from './component/MainForm/Form';
 import { useEffect } from 'react';
 import { useAuth } from './component/context/auth';
-
+import RSVP from './component/SecondaryForms/rsvp.jsx';
+import PaymentProof from './component/SecondaryForms/SBICollect.jsx';
 
 function App() {
   const [auth , setAuth] = useAuth();
@@ -21,13 +22,19 @@ function App() {
     const storedAuth = localStorage.getItem("auth");
     if (storedAuth) {
         const token = JSON.parse(storedAuth);
+        console.log("token aaya hai:",token)
         setAuth((prev) => ({ ...prev, token }));
     } else {
         // If no token in local storage, check URL params
         const params = new URLSearchParams(window.location.search);
         const tokenFromUrl = params.get('token');
+        console.log("token aaya hai:",tokenFromUrl)
         if (tokenFromUrl) {
+<<<<<<< HEAD
             localStorage.setItem("auth", JSON.stringify({token : tokenFromUrl}));
+=======
+            localStorage.setItem("auth", {token:JSON.stringify(tokenFromUrl)});
+>>>>>>> d3df84c5304b2b0866b89373d4fd5e3d2a7b3b01
             setAuth((prev) => ({ ...prev, token: tokenFromUrl }));
         }
     }
@@ -39,6 +46,9 @@ function App() {
         <Route path='/' element={<Login/>} /> 
         <Route path='/signup' element={<Signup/>} />
         <Route path='dashboard/*' element={<Private/>} >
+        <Route path="rsvp" element={<RSVP/>} />
+        <Route path="sbicollect" element={<PaymentProof/>} />
+        
         {/* <Route path='dashboard/*' > */}
           <Route path="main" element={<Batch/>} />
           <Route path="main/2022" element={<MainForm/>} />
@@ -47,9 +57,9 @@ function App() {
           <Route path="main/2022/:rollNumber/form" element={<Form/>} />
           <Route path="main/2023/:rollNumber/form" element={<Form/>} />
           <Route path="main/2024/:rollNumber/form" element={<Form/>} />
-          <Route path="*" element={<Page/>} />
+          {/* <Route path="*" element={<Page/>} /> */}
         </Route>
-        <Route path="*" element={<Page/>} />
+        {/* <Route path="*" element={<Page/>} /> */}
       </Routes>
     </>
   )

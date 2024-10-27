@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import styles from './Form.module.css';
 import { useLocation } from 'react-router-dom';
+import { useAuth } from '../context/auth';
 
 const AlumniForm = () => {
+<<<<<<< HEAD
   const { rollNumber, batch } = useLocation().state;
+=======
+  const {rollNumber , batch} = useLocation().state;
+  const [auth,setAuth]=useAuth()
+>>>>>>> d3df84c5304b2b0866b89373d4fd5e3d2a7b3b01
   const [formData, setFormData] = useState({
     name: '',
     fatherName: '',
@@ -67,14 +73,50 @@ const AlumniForm = () => {
     }
 
     try {
-      let response = await fetch('http://localhost:8080/api/v1/alumni', {
+      let response = await fetch('http://localhost:8080/api/v1/alumni?folder=profile', {
         method: 'POST',
+        headers:{
+          "Authorization" : auth?.token
+        },
         body: data,
       });
 
       if (response.ok) {
         const result = await response.json();
         console.log('Success:', result);
+<<<<<<< HEAD
+=======
+        // setFormData({
+        //   name: '',
+        //   fatherName: '',
+        //   dob: '',
+        //   gender: '',
+        //   maritalStatus: '',
+        //   course: '',
+        //   branch: '',
+        //   enrollmentNo: '',
+        //   yearOfPassing: '',
+        //   mobile: '',
+        //   email: '',
+        //   currentAddress: '',
+        //   permanentAddress: '',
+        //   fieldOfWork: '',
+        //   package: '',
+        //   occupation: '',
+        //   higherStudiesCourse: '',
+        //   specialization: '',
+        //   university: '',
+        //   universityAddress: '',
+        //   employer: '',
+        //   jobDesignation: '',
+        //   officePhone: '',
+        //   officeEmail: '',
+        //   photo: null,
+        //   signature: null,
+        //   rollNumber: '',
+        //   batch: '',
+        // });
+>>>>>>> d3df84c5304b2b0866b89373d4fd5e3d2a7b3b01
         setErrors({});
       } else {
         setErrors({ submit: 'Error submitting the form, please try again.' });

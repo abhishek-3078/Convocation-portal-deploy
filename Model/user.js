@@ -10,7 +10,16 @@ const userSchema = new mongoose.Schema({
         type : String ,
         required : false
     } ,
-});
+        
+    profilePhotoName:{
+        type:String,
+        default:""
+    },
+    profileUrl:{
+        type:String,
+        default:null
+    }
+}); 
 
 
 const User = mongoose.model("User" , userSchema);
