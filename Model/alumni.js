@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
+const Counter = require("./counter.js");
 
 const alumniSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User", // Reference to the User model
+        ref: "User",
     },
     name: { type: String, required: true },
     fatherName: { type: String, required: true },
@@ -18,11 +19,9 @@ const alumniSchema = new mongoose.Schema({
     email: { type: String, required: true },
     currentAddress: { type: String, required: true },
     permanentAddress: { type: String, required: true },
-    
-    fieldOfWork: { type: String},
-    package: { type: String},
-    occupation: { type: String},
-    
+    fieldOfWork: { type: String },
+    package: { type: String },
+    occupation: { type: String },
     higherStudiesCourse: { type: String },
     specialization: { type: String },
     university: { type: String },
@@ -31,21 +30,39 @@ const alumniSchema = new mongoose.Schema({
     jobDesignation: { type: String },
     officePhone: { type: String },
     officeEmail: { type: String },
-    photo: { type: String ,required:true}, // Use String to store the file path or URL,
-    photoFileName: { type: String }, // Use String to store the file path or URL,
-    signature: { type: String,required:true }, // Use String to store the file path or URL,
-    signatureFileName: { type: String }, // Use String to store the file path or URL,
-    receiptFileName: { type: String }, // Use String to store the file path or URL,
-    receiptUrl: { type: String }, // Use
-    rollNumber : {type : String , required : true , unique : true} ,
-    batch : {type : String} ,
-    
-    department : {type: String , required : true} ,
-    bloodGroup : {type: String , required : true} ,
-    employmentStatus : {type: String, required : true} ,
-    jobs : {type : String}
+    photo: { type: String, required: true },
+    photoFileName: { type: String },
+    signature: { type: String, required: true },
+    signatureFileName: { type: String },
+    receiptFileName: { type: String },
+    receiptUrl: { type: String },
+    rollNumber: { type: String, required: true, unique: true },
+    batch: { type: String },
+    department: { type: String, required: true },
+    bloodGroup: { type: String, required: true },
+    employmentStatus: { type: String, required: true },
+    jobs: { type: String },
+    alumniId: { type: Number, default: 1000 },
 });
 
-// Export Alumni model
+alumniSchema.pre("save", async function (next) {
+    const alumni = this;
+    if (!alumni.isNew) return next();
+
+    try {
+        const counter = await Counter.findByIdAndUpdate(
+            { _id: "alumniId" },
+            { $inc: { seq: 1 } },
+            { new: true, upsert: true }
+        );
+
+        alumni.alumniId = counter.seq;
+        next();
+    } catch (error) {
+        next(error);
+    }
+});
+
+
 const Alumni = mongoose.model("Alumni", alumniSchema);
 module.exports = Alumni;
