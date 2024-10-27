@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import {Link, useNavigate} from "react-router-dom";
 // import checkSession from './helper/checkSession';
 import { useAuth } from './context/auth';
+import { API } from '../const';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -16,7 +17,7 @@ const Login = () => {
         event.preventDefault();
         // Handle the login logic here
         try {
-            let response = await fetch("http://localhost:8080/api/v1/auth/login" , {
+            let response = await fetch(`${API}/api/v1/auth/login` , {
                 method : "POST" ,
                 headers : {
                     "Content-Type" : "application/json" , 

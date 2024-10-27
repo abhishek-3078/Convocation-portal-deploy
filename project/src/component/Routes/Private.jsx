@@ -39,9 +39,10 @@ const Private = () => {
   
   
     return <div>
-      {
+      <Outlet/>
+      {/* {
         (ok) ? <Outlet/> : <Page/>
-      }
+      } */}
     </div>;
   };
   

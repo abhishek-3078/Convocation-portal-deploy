@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import Layout from '../Layout/Layout';
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import toast from 'react-hot-toast';
+// import toast from 'react-hot-toast';
 import styles from './MainForm.module.css';
 import RESULT from './Result';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const MainForm = () => {
   const [rollNumber, setRollNumber] = useState('');
@@ -15,7 +18,7 @@ const MainForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!rollNumber) {
-      toast.error("Please enter your roll number first before verifying");
+      toast.info("Please enter your roll number first before verifying");
       return;
     }
     var newbatch = parseInt(batch);
@@ -24,9 +27,11 @@ const MainForm = () => {
     setLoading(true);
     try {
       if (rollNumber.length > 2 && (year === newbatch)){
-        setResult(true);
+        navigate(`/dashboard/main/${batch}/${rollNumber}/form` , {state : {rollNumber : rollNumber , batch}})
+        // setResult(true);
       }
       else {
+        
         toast.error("Wrong number or batch year");
       }
     } catch (err) {
@@ -39,6 +44,7 @@ const MainForm = () => {
 
   return (
     <Layout>
+      <ToastContainer/>
     {!result && <div className={styles.container}>
     <h1 className={styles.title}>Verification</h1>
     <p className={styles.subtitle}>Please verify your roll number</p>
@@ -65,9 +71,9 @@ const MainForm = () => {
     </div>
     </div>}
 
-    {
+    {/* {
         result && <RESULT batch={batch} rollNumber={rollNumber}/>
-    }
+    } */}
     </Layout>
   );
 };
