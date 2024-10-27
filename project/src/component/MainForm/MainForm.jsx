@@ -19,8 +19,7 @@ const MainForm = () => {
       return;
     }
     var newbatch = parseInt(batch);
-    var year = parseInt(rollNumber[1] + rollNumber[2]) + 2000
-    console.log(year," : ",newbatch)
+    var year = parseInt(rollNumber[1] + rollNumber[2]) + 2004
 
     setLoading(true);
     try {
