@@ -12,6 +12,7 @@ import { useEffect } from 'react';
 import { useAuth } from './component/context/auth';
 import RSVP from './component/SecondaryForms/rsvp.jsx';
 import PaymentProof from './component/SecondaryForms/SBICollect.jsx';
+import PdfGenerator from './component/SecondaryForms/InvitationDownload.jsx';
 
 function App() {
   const [auth , setAuth] = useAuth();
@@ -44,6 +45,7 @@ function App() {
         <Route path='dashboard/*' element={<Private/>} >
         <Route path="rsvp" element={<RSVP/>} />
         <Route path="sbicollect" element={<PaymentProof/>} />
+        <Route path="invitation" element={<PdfGenerator/>} />
         
         {/* <Route path='dashboard/*' > */}
           <Route path="main" element={<Batch/>} />

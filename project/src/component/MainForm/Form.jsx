@@ -248,7 +248,7 @@ const AlumniForm = () => {
           <label>Permanent Address</label>
           <input type="text" name="permanentAddress" value={formData.permanentAddress} onChange={handleChange} required />
         </section>
-
+            
         {/* Professional Details Section */}
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>Professional Details</h2>

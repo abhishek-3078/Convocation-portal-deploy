@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { API } from '../../const';
-import { useAuth } from '../context/auth';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { API } from "../../const";
+import { useAuth } from "../context/auth";
 
 const PaymentProof = () => {
-  const [transactionId, setTransactionId] = useState('');
+  const [transactionId, setTransactionId] = useState("");
   const [receipt, setReceipt] = useState(null);
-  const [auth,setAuth] = useAuth();
+  const [auth, setAuth] = useAuth();
   const navigate = useNavigate();
+  const [pdfUrl, setPdfUrl] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleReceiptUpload = (e) => {
     setReceipt(e.target.files[0]); // Capture the uploaded file
@@ -16,33 +18,38 @@ const PaymentProof = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (transactionId && receipt) {
+      setLoading(true);
       // Create a FormData object to handle the file and transaction ID
       const formData = new FormData();
       formData.append("transactionId", transactionId);
       formData.append("receipt", receipt);
-      
+
       try {
-        const response = await fetch(`${API}/api/v1/alumni/receipt?folder=receipt`, {
-          method: "POST",
-          headers: {
-            "Authorization": auth?.token
-          },
-          body: formData
-        });
-  
+        const response = await fetch(
+          `${API}/api/v1/alumni/receipt?folder=receipt`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: auth?.token,
+            },
+            body: formData,
+          }
+        );
+
         if (response.ok) {
           console.log("Transaction ID:", transactionId);
           console.log("Uploaded Receipt:", receipt);
-          // navigate("/dashboard");
+          navigate("/dashboard/invitation");
         } else {
           const errorData = await response.json();
           console.error("Error:", errorData);
           alert("Failed to submit. Please try again.");
         }
       } catch (error) {
-        console.error("Error:", error);
+        console.error("Error:", error.message);
         alert("An error occurred. Please try again.");
       }
+    setLoading(false)
     } else {
       alert("Please provide both the transaction ID and receipt.");
     }
@@ -71,7 +78,8 @@ const PaymentProof = () => {
         </div>
 
         <p className="text-gray-600 text-center mb-4">
-          If you have already made the payment, please fill in the details below.
+          If you have already made the payment, please fill in the details
+          below.
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -108,17 +116,41 @@ const PaymentProof = () => {
               className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none"
               required
             />
-
           </div>
 
           <button
             type="submit"
-            className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg shadow-md transition-all"
+            className={`w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg shadow-md transition-all ${
+              loading ? "opacity-70 cursor-wait" : ""
+            }`}
+            disabled={loading} // Disable button during loading
           >
-            Submit
+            {loading ? "Submitting..." : "Submit"}
           </button>
         </form>
       </div>
+{/* 
+      <div className="mt-8">
+        <button
+          onClick={getInvitation}
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg shadow-md transition-all"
+        >
+          Get Invitation PDF
+        </button>
+        {loading && <p className="text-center mt-4">Loading...</p>}
+      </div>
+      {pdfUrl && (
+        <div className="mt-4">
+          <a
+            href={pdfUrl}
+            target="_self"
+            download = "invitation.pdf"
+            className="text-blue-600 underline"
+          >
+            View Invitation PDF
+          </a>
+        </div>
+      )} */}
     </div>
   );
 };
