@@ -9,6 +9,9 @@ router.post("/", isAuth, alumniController.uploadAlumniFiles, alumniController.cr
 // Route to get all alumni
 router.get("/", alumniController.getAllAlumni);
 
+router.get("/invitation",isAuth, alumniController.sendInvitaion);
+
+
 // Route to get an alumni by ID
 router.get("/:id", alumniController.getAlumniById);
 
@@ -19,5 +22,6 @@ router.put("/:id", alumniController.updateAlumni);
 router.delete("/:id", alumniController.deleteAlumni);
 
 router.post("/receipt",isAuth, alumniController.uploadReceiptFiles, alumniController.createReceipt);
+
 
 module.exports = router;

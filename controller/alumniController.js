@@ -1,8 +1,11 @@
 const Alumni = require("../Model/alumni.js"); // Adjust the path as necessary
 const multer = require("multer");
 const path = require("path");
+const fs = require('fs');
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const cloudinary = require('cloudinary').v2;
+// import makePDF from "../helper/makePdf.js";
+const makePDF = require("../helper/makePdf.js");
 
 cloudinary.config({ 
     cloud_name: process.env.CLOUD_NAME, 
@@ -133,7 +136,7 @@ module.exports.createReceipt = async (req, res) => {
         }
         const receiptPath = req.file ? req.file.path : null;
         const receiptFileName = req.file ? req.file.filename : null;
-        console.log(req.file)
+        // console.log(req.file)
         const updatedReceipt = await Alumni.findOneAndUpdate(
             { user: userId }, // Find the Alumni record by userId
             { 
@@ -153,3 +156,49 @@ module.exports.createReceipt = async (req, res) => {
         res.status(500).json({ message: "Server error" });
     }
 }
+
+
+
+module.exports.sendInvitaion = async (req, res) => {
+    // const { id } = req.params;
+    // console.log(req)
+    const userId=req.user.id
+    console.log(userId)
+
+    try {
+        const alumni = await Alumni.findOne({ user: userId }).populate("user", "email");
+        if (!alumni) {
+            return res.status(404).json({ message: "Alumni not found" });
+        }
+        // res.status(200).json(alumni);
+        const pdfDataArray = await makePDF(alumni)
+        const pdfBuffer = Buffer.from(pdfDataArray);
+        // Define the path where you want to save the PDF
+        // const filePath = path.join(__dirname, './', 'admit_card_12213082.pdf');
+
+        // Save the PDF to the specified path
+        // fs.writeFileSync(filePath, pdfBuffer);
+
+        // console.log("PDF saved successfully at:", filePath);
+        res.set({
+            'Content-Type': 'application/pdf',
+            'Content-Disposition': 'attachment; filename="admit_card_12213082.pdf"',
+          
+        });
+
+        // console.log("PDF Buffer:", pdfBuffer);
+        const base64Data = pdfBuffer.toString('base64');
+
+        res.json({
+            data: base64Data,
+            filename: 'invitation.pdf'
+        });
+
+       
+        // res.send(pdfBuffer);
+        // res.status(200).json({ message: "Alumni deleted successfully" });
+    } catch (error) {
+        console.error("Error deleting alumni:", error);
+        res.status(500).json({ message: "Server error" });
+    }
+};

@@ -18,18 +18,19 @@ const MainForm = () => {
       toast.error("Please enter your roll number first before verifying");
       return;
     }
+    var newbatch = parseInt(batch);
+    var year = parseInt(rollNumber[1] + rollNumber[2]) + 2004
 
     setLoading(true);
     try {
-      console.log(batch);
-      if (rollNumber.length > 2 && (parseInt("20" + rollNumber[1] + rollNumber[2]) + 4) === batch){
-        console.log(batch);
+      if (rollNumber.length > 2 && (year === newbatch)){
         setResult(true);
       }
       else {
-        toast.error("Wrong roll number or batch year");
+        toast.error("Wrong number or batch year");
       }
     } catch (err) {
+      alert(';sdcsdv')
       toast.error(err.message);
     } finally {
       setLoading(false);

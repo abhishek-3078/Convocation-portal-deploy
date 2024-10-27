@@ -13,6 +13,7 @@ import { useAuth } from './component/context/auth';
 import RSVP from './component/SecondaryForms/rsvp.jsx';
 import PaymentProof from './component/SecondaryForms/SBICollect.jsx';
 import Thankyou from './component/Thankyou/Thankyou';
+import PdfGenerator from './component/SecondaryForms/InvitationDownload.jsx';
 
 function App() {
   const [auth , setAuth] = useAuth();
@@ -45,6 +46,7 @@ function App() {
         <Route path="sbicollect" element={<PaymentProof/>} />
         <Route path="thankyou" element={<Thankyou/>} />
 
+        <Route path="invitation" element={<PdfGenerator/>} />
         
         {/* <Route path='dashboard/*' > */}
           <Route path="main" element={<Batch/>} />

@@ -249,6 +249,10 @@ const AlumniForm = () => {
             <option value = "Mechanical Department">Mechanical Department</option>
             <option value = "Electrical Department">Electrical Department</option>
             <option value = "Electronics and Communication Department">Electronics and Communication Department</option>
+            <option value = "Science">Science</option>
+            <option value = "Computer Application">Computer Application</option>
+            <option value = "Humanities and Social Sciences">Humanities and Social Sciences</option>
+            <option value = "School">School</option>
           </select>
 
           <label>Branch</label>
@@ -261,6 +265,13 @@ const AlumniForm = () => {
             <option value="Electrical">Electrical</option>
             <option value="Production and Industrial">Production and Industrial</option>
             <option value="Electronics and Communication">Electronics and Communication</option>
+            <option value="Chemistry">Chemistry</option>
+            <option value="Physics">Physics</option>
+            <option value="Mathematics">Mathematics</option>
+            <option value="Computer Application">Computer Application</option>
+            <option value="Business Administration">Business Administration</option>
+            <option value="Humanities and Social Sciences">Humanities and Social Sciences</option>
+            <option value="School of Renewable Energy and Efficiency">School of Renewable Energy and Efficiency</option>
           </select>
 
           <label>Enrollment No</label>
