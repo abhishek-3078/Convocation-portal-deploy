@@ -22,19 +22,19 @@ const Batch = () => {
         <h1 className="text-2xl font-bold mb-4">Select Your Graduating Year</h1>
         <div className="flex gap-6">
           <button
-            className={`flex items-center justify-center p-8 text-lg font-bold text-gray-800 bg-white border border-gray-300 rounded-xl cursor-pointer shadow-md transition-transform duration-200 ease-in-out w-36 h-30 ${selectedBatch === 2022 ? 'bg-red-100' : ''}`} // lighter red
+            className={`flex items-center justify-center p-8 text-lg font-bold text-gray-800 bg-white border border-gray-300 rounded-xl cursor-pointer shadow-md transition-transform duration-200 ease-in-out w-36 h-30 ${selectedBatch === 2022 ? 'bg-red-300' : ''}`}
             onClick={() => handleSelectBatch(2022)}
           >
             Batch 2022
           </button>
           <button
-            className={`flex items-center justify-center p-8 text-lg font-bold text-gray-800 bg-white border border-gray-300 rounded-xl cursor-pointer shadow-md transition-transform duration-200 ease-in-out w-36 h-30 ${selectedBatch === 2023 ? 'bg-red-100' : ''}`} // lighter red
+            className={`flex items-center justify-center p-8 text-lg font-bold text-gray-800 bg-white border border-gray-300 rounded-xl cursor-pointer shadow-md transition-transform duration-200 ease-in-out w-36 h-30 ${selectedBatch === 2023 ? 'bg-red-300' : ''}`}
             onClick={() => handleSelectBatch(2023)}
           >
             Batch 2023
           </button>
           <button
-            className={`flex items-center justify-center p-8 text-lg font-bold text-gray-800 bg-white border border-gray-300 rounded-xl cursor-pointer shadow-md transition-transform duration-200 ease-in-out w-36 h-30 ${selectedBatch === 2024 ? 'bg-red-100' : ''}`} // lighter red
+            className={`flex items-center justify-center p-8 text-lg font-bold text-gray-800 bg-white border border-gray-300 rounded-xl cursor-pointer shadow-md transition-transform duration-200 ease-in-out w-36 h-30 ${selectedBatch === 2024 ? 'bg-red-300' : ''}`}
             onClick={() => handleSelectBatch(2024)}
           >
             Batch 2024
@@ -43,7 +43,7 @@ const Batch = () => {
         <button
           onClick={handleSubmit}
           disabled={!selectedBatch} // Disable button if no batch is selected
-          className={`mt-4 flex items-center justify-center p-4 text-lg font-bold text-white border border-red-600 rounded-lg cursor-pointer shadow-md transition-transform duration-200 ease-in-out focus:outline-none focus:ring-4 focus:ring-red-400 ${!selectedBatch ? 'bg-gray-400 cursor-not-allowed' : 'bg-red-600 hover:bg-red-700'}`} // dark red and hover state
+          className={`mt-4 flex items-center justify-center p-4 text-lg font-bold text-white border border-red-600 rounded-lg cursor-pointer shadow-md transition-transform duration-200 ease-in-out focus:outline-none focus:ring-4 focus:ring-red-400 ${!selectedBatch ? 'bg-gray-400 cursor-not-allowed' : 'bg-red-600 hover:bg-red-700'}`}
         >
           Submit
         </button>

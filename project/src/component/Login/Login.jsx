@@ -4,7 +4,7 @@ import Form from './Form';
 const Login = () => {
   return (
     <div
-      className="flex items-center justify-center w-full bg-cover bg-center"
+      className="flex items-center justify-center w-full h-screen bg-cover bg-center"
       style={{ backgroundImage: `url('/GoldenJubilee.jpg')` }}
     >
       <div className="shadow-lg  rounded-3xl my-4">
