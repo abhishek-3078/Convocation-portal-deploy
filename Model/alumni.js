@@ -42,7 +42,7 @@ const alumniSchema = new mongoose.Schema({
     bloodGroup: { type: String, required: true },
     employmentStatus: { type: String, required: true },
     jobs: { type: String },
-    alumniId: { type: Number, default: 1000 },
+    alumniId: { type: Number, default: 0 },
 });
 
 alumniSchema.pre("save", async function (next) {

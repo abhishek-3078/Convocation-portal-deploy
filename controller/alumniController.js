@@ -136,7 +136,7 @@ module.exports.createReceipt = async (req, res) => {
         }
         const receiptPath = req.file ? req.file.path : null;
         const receiptFileName = req.file ? req.file.filename : null;
-        console.log(req.file)
+        // console.log(req.file)
         const updatedReceipt = await Alumni.findOneAndUpdate(
             { user: userId }, // Find the Alumni record by userId
             { 

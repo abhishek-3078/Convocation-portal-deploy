@@ -127,7 +127,9 @@ const makePDF = async (alumni) => {
   </head>
   <body>
       <div class="container">
-          <div class="uuid">{${alumni.serial??alumni.rollNumber}</div>
+          <div class="uuid">
+  ${(alumni.alumniId ?? alumni.rollNumber).toString().padStart(4, '0')}
+</div>
           <img src="${logoUrl}" alt="NIT Kurukshetra Logo" class="logo">
           <h1>National Institute of Technology Kurukshetra</h1>
           <h2 style="font-family: 'Times New Roman', serif; font-weight: 400; font-style: italic; font-size: 24px;">
