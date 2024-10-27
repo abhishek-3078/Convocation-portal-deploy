@@ -47,7 +47,32 @@ const AlumniForm = () => {
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
     if (type === 'file') {
-      setFormData({ ...formData, [name]: files[0] });
+      const file = files[0];
+      let maxSize = 0;
+
+      // Set maxSize based on the input name
+      if (name === 'photo') {
+        maxSize = 50 * 1024; // 50KB
+      } else if (name === 'signature') {
+        maxSize = 20 * 1024; // 20KB
+      }
+
+      // Check if the file size exceeds the maxSize
+      if (file && file.size > maxSize) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          [name]: `${name.charAt(0).toUpperCase() + name.slice(1)} size exceeds the maximum limit of ${maxSize / 1024}KB.`,
+        }));
+        return;
+      } else {
+        // Clear any previous error for this input
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          [name]: null,
+        }));
+      }
+
+      setFormData({ ...formData, [name]: file });
     } else {
       setFormData({ ...formData, [name]: value });
     }
@@ -331,9 +356,11 @@ const AlumniForm = () => {
           <h2 className={styles.sectionTitle}>Documents Upload</h2>
           <label>Photo</label>
           <input type="file" name="photo" accept="image/jpeg" onChange={handleChange} />
+          {errors.photo && <span className={styles.error}>{errors.photo}</span>}
 
           <label>Signature</label>
           <input type="file" name="signature" accept="image/jpeg" onChange={handleChange} />
+          {errors.signature && <span className={styles.error}>{errors.signature}</span>}
         </section>
 
         <button type="submit" className={styles.submitButton}>Submit</button>
