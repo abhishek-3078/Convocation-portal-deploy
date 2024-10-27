@@ -1,0 +1,73 @@
+/* MainForm.module.css */
+
+.container {
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+    border: 2px solid #f3f4f6;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .title {
+    font-size: 3rem;
+    font-weight: 600;
+    color: black;
+  }
+  
+  .subtitle {
+    font-weight: 500;
+    font-size: 1.125rem;
+    color: #6b7280;
+    margin-top: 1rem;
+  }
+  
+  .inputGroup {
+    margin-top: 2rem;
+  }
+  
+  .label {
+    font-size: 1.125rem;
+    font-weight: 500;
+  }
+  
+  .input {
+    width: 100%;
+    border: 2px solid #f3f4f6;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin-top: 0.25rem;
+    background: transparent;
+  }
+  
+  .buttonGroup {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .button {
+    transition: all 0.15s ease;
+    padding: 0.75rem;
+    border-radius: 1rem;
+    font-weight: bold;
+    font-size: 1.125rem;
+    background-color: #7c3aed;
+    color: white;
+    text-align: center;
+  }
+  
+  .button:hover {
+    transform: scale(1.01);
+  }
+  
+  .button:active {
+    transform: scale(0.98);
+  }
+  
+  .buttonDisabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  

@@ -1,16 +1,28 @@
 const Alumni = require("../Model/alumni.js"); // Adjust the path as necessary
 const multer = require("multer");
 const path = require("path");
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const cloudinary = require('cloudinary').v2;
 
-
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, "uploads/"); // Save files to "uploads" directory
-    },
-    filename: function (req, file, cb) {
-        cb(null, `${Date.now()}-${file.originalname}`);
-    }
+cloudinary.config({ 
+    cloud_name: process.env.CLOUD_NAME, 
+    api_key: process.env.CLOUDINARY_API, 
+    api_secret: process.env.CLOUD_SECRET
 });
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: async (req, file) => {
+        console.log("incoming request:",req.query.folder)
+        // Use folder path from req.body, default to 'uploads' if not provided
+        const folderName = req.query.folder || 'uploads';
+        
+        return {
+            folder: folderName,
+            allowedFormats: ['jpg', 'png', 'pdf'], // Allowed file formats
+        };
+    },
+});
+
 
 const upload = multer({ storage: storage });
 
@@ -22,19 +34,25 @@ module.exports.uploadAlumniFiles = upload.fields([
 
 // Create alumni and save document with file paths
 module.exports.createAlumni = async (req, res) => {
-    const { userId, ...alumniData } = req.body;
+    const { ...alumniData } = req.body;
+    const userId=req.user.id
 
     try {
         // Get file paths for photo and signature
         console.log(req.body);
         const photoPath = req.files.photo ? req.files.photo[0].path : null;
+        const photoFileName = req.files.photo ? req.files.photo[0].filename : null;
         const signaturePath = req.files.signature ? req.files.signature[0].path : null;
+        const signatureFileName = req.files.signature ? req.files.signature[0].filename : null;
+        console.log(req.files)
 
         const newAlumni = new Alumni({
             user: userId,
             ...alumniData,
             photo: photoPath,
-            signature: signaturePath
+            signature: signaturePath,
+            photoFileName: photoFileName,
+            signatureFileName: signatureFileName
         });
 
         await newAlumni.save();
@@ -104,3 +122,34 @@ module.exports.deleteAlumni = async (req, res) => {
         res.status(500).json({ message: "Server error" });
     }
 };
+
+
+module.exports.uploadReceiptFiles = upload.single("receipt");
+module.exports.createReceipt = async (req, res) => {      
+    const userId=req.user.id
+    try {
+        if (req.file && req.file.mimetype !== 'application/pdf') {
+            return res.status(400).json({ message: "Invalid file type. Please upload a PDF file." });
+        }
+        const receiptPath = req.file ? req.file.path : null;
+        const receiptFileName = req.file ? req.file.filename : null;
+        console.log(req.file)
+        const updatedReceipt = await Alumni.findOneAndUpdate(
+            { user: userId }, // Find the Alumni record by userId
+            { 
+                receiptUrl: receiptPath, 
+                receiptFileName: receiptFileName 
+            }, // Update fields
+            { new: true } // Return the updated document
+        );
+
+        if (!updatedReceipt) {
+            return res.status(404).json({ message: "Alumni not found for the user." });
+        }
+
+        res.status(200).json({ message: "Receipt updated successfully!", receipt: updatedReceipt });
+    } catch (error) {
+        console.error("Error uploading receipt:", error);
+        res.status(500).json({ message: "Server error" });
+    }
+}

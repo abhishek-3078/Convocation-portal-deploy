@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import styles from './Form.module.css';
 import { useLocation } from 'react-router-dom';
+import { useAuth } from '../context/auth';
 
 const AlumniForm = () => {
   const {rollNumber , batch} = useLocation().state;
+  const [auth,setAuth]=useAuth()
   const [formData, setFormData] = useState({
     name: '',
     fatherName: '',
@@ -67,44 +69,47 @@ const AlumniForm = () => {
     }
 
     try {
-      let response = await fetch('http://localhost:8080/api/v1/alumni', {
+      let response = await fetch('http://localhost:8080/api/v1/alumni?folder=profile', {
         method: 'POST',
+        headers:{
+          "Authorization" : auth?.token
+        },
         body: data,
       });
 
       if (response.ok) {
         const result = await response.json();
         console.log('Success:', result);
-        setFormData({
-          name: '',
-          fatherName: '',
-          dob: '',
-          gender: '',
-          maritalStatus: '',
-          course: '',
-          branch: '',
-          enrollmentNo: '',
-          yearOfPassing: '',
-          mobile: '',
-          email: '',
-          currentAddress: '',
-          permanentAddress: '',
-          fieldOfWork: '',
-          package: '',
-          occupation: '',
-          higherStudiesCourse: '',
-          specialization: '',
-          university: '',
-          universityAddress: '',
-          employer: '',
-          jobDesignation: '',
-          officePhone: '',
-          officeEmail: '',
-          photo: null,
-          signature: null,
-          rollNumber: '',
-          batch: '',
-        });
+        // setFormData({
+        //   name: '',
+        //   fatherName: '',
+        //   dob: '',
+        //   gender: '',
+        //   maritalStatus: '',
+        //   course: '',
+        //   branch: '',
+        //   enrollmentNo: '',
+        //   yearOfPassing: '',
+        //   mobile: '',
+        //   email: '',
+        //   currentAddress: '',
+        //   permanentAddress: '',
+        //   fieldOfWork: '',
+        //   package: '',
+        //   occupation: '',
+        //   higherStudiesCourse: '',
+        //   specialization: '',
+        //   university: '',
+        //   universityAddress: '',
+        //   employer: '',
+        //   jobDesignation: '',
+        //   officePhone: '',
+        //   officeEmail: '',
+        //   photo: null,
+        //   signature: null,
+        //   rollNumber: '',
+        //   batch: '',
+        // });
         setErrors({});
       } else {
         setErrors({ submit: 'Error submitting the form, please try again.' });

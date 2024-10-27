@@ -71,7 +71,9 @@ app.use(express.json());
 app.use("/uploads", express.static("uploads"));
 
 main();
-
+app.get("/" , (req , res)=> {
+    res.send("Hello");
+});
 
 app.use("/api/v1/auth" , authRoute);
 app.use("/api/v1/alumni" , alumniRoute);

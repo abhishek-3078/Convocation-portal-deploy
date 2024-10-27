@@ -10,8 +10,7 @@ const userSchema = new mongoose.Schema({
         type : String ,
         required : false
     } ,
-        required : true
-    },
+        
     profilePhotoName:{
         type:String,
         default:""
@@ -20,7 +19,7 @@ const userSchema = new mongoose.Schema({
         type:String,
         default:null
     }
-});
+}); 
 
 
 const User = mongoose.model("User" , userSchema);
