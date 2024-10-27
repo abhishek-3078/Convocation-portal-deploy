@@ -68,7 +68,7 @@ module.exports.login = async (req, res) => {
     if (!user){
         return res.json({
             success : false ,
-            message : "User is already exist"
+            message : "User does not exist"
         })
     }
 

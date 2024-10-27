@@ -1,0 +1,19 @@
+import React from "react";
+import { Button, Result } from "antd";
+const App = () => (
+  <div
+    style={{
+      minHeight: "100vh",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    }}
+  >
+    <Result
+      status="success"
+      title="Data submitted successfully"
+      subTitle="Thankyou for your cooperation"
+    />
+  </div>
+);
+export default App;

@@ -35,6 +35,11 @@ const AlumniForm = () => {
     signature: null,
     rollNumber: rollNumber,
     batch: "20" + batch,
+    
+    department: "",
+    bloodGroup: "",
+    employmentStatus: "",
+    jobs: ""
   });
 
   const [errors, setErrors] = useState({});
@@ -42,7 +47,32 @@ const AlumniForm = () => {
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
     if (type === 'file') {
-      setFormData({ ...formData, [name]: files[0] });
+      const file = files[0];
+      let maxSize = 0;
+
+      // Set maxSize based on the input name
+      if (name === 'photo') {
+        maxSize = 50 * 1024; // 50KB
+      } else if (name === 'signature') {
+        maxSize = 20 * 1024; // 20KB
+      }
+
+      // Check if the file size exceeds the maxSize
+      if (file && file.size > maxSize) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          [name]: `${name.charAt(0).toUpperCase() + name.slice(1)} size exceeds the maximum limit of ${maxSize / 1024}KB.`,
+        }));
+        return;
+      } else {
+        // Clear any previous error for this input
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          [name]: null,
+        }));
+      }
+
+      setFormData({ ...formData, [name]: file });
     } else {
       setFormData({ ...formData, [name]: value });
     }
@@ -132,7 +162,7 @@ const AlumniForm = () => {
           <input type="text" name="name" value={formData.name} onChange={handleChange} />
           {errors.name && <span className={styles.error}>{errors.name}</span>}
 
-          <label>Father's Name</label>
+          <label>Father&apos;s Name</label>
           <input type="text" name="fatherName" value={formData.fatherName} onChange={handleChange} />
 
           <label>Date of Birth</label>
@@ -182,6 +212,19 @@ const AlumniForm = () => {
             <option value="Divorced">Divorced</option>
             <option value="Widowed">Widowed</option>
           </select>
+
+          <label>Blood Group</label>
+          <select name="bloodGroup" value={formData.bloodGroup} onChange={handleChange} className={styles.select}>
+            <option value="">Select Blood Group</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+          </select>
         </section>
 
         {/* Academic Details Section */}
@@ -194,6 +237,16 @@ const AlumniForm = () => {
             <option value="MBA">MBA</option>
             <option value="MTech">MTech</option>
             <option value="MCA">MCA</option>
+          </select>
+
+          <label>Department</label>
+          <select name="department" value={formData.department} onChange={handleChange} className={styles.select}>
+            <option value = "">Select Department</option>
+            <option value = "Computer Department">Computer Department</option>
+            <option value = "Civil Department">Civil Department</option>
+            <option value = "Mechanical Department">Mechanical Department</option>
+            <option value = "Electrical Department">Electrical Department</option>
+            <option value = "Electronics and Communication Department">Electronics and Communication Department</option>
           </select>
 
           <label>Branch</label>
@@ -252,6 +305,28 @@ const AlumniForm = () => {
         {/* Professional Details Section */}
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>Professional Details</h2>
+          <label>Employment Status</label>
+          <select name="employmentStatus" value={formData.employmentStatus} onChange={handleChange} className={styles.select}>
+            <option value="">Select Employment Status</option>
+            <option value="Employed">Employed</option>
+            <option value="Self Employed">Self Employed</option>
+            <option value="Unemployed">Unemployed</option>
+            <option value="Other">Other</option>
+          </select>
+
+          {/* Conditionally render the text box if "Other" is selected */}
+          {formData.employmentStatus === "Other" && (
+            <div>
+              <label>Please specify:</label>
+              <input
+                type="text"
+                name="employmentStatusOther"
+                value={formData.employmentStatusOther}
+                onChange={handleChange}
+              />
+            </div>
+          )}
+
           <label>Field of Work</label>
           <input type="text" name="fieldOfWork" value={formData.fieldOfWork} onChange={handleChange} />
 
@@ -261,8 +336,10 @@ const AlumniForm = () => {
           <label>Employer</label>
           <input type="text" name="employer" value={formData.employer} onChange={handleChange} />
 
-          <label>Job Designation</label>
+          <label>Job Designation<sup>#</sup></label>
           <input type="text" name="jobDesignation" value={formData.jobDesignation} onChange={handleChange} />
+          <p><sup>#</sup> Separate with comma for multiple designations</p>
+
 
           <label>Package</label>
           <select name="package" value={formData.package} onChange={handleChange} className={styles.select}>
@@ -279,9 +356,11 @@ const AlumniForm = () => {
           <h2 className={styles.sectionTitle}>Documents Upload</h2>
           <label>Photo</label>
           <input type="file" name="photo" accept="image/jpeg" onChange={handleChange} />
+          {errors.photo && <span className={styles.error}>{errors.photo}</span>}
 
           <label>Signature</label>
           <input type="file" name="signature" accept="image/jpeg" onChange={handleChange} />
+          {errors.signature && <span className={styles.error}>{errors.signature}</span>}
         </section>
 
         <button type="submit" className={styles.submitButton}>Submit</button>

@@ -34,9 +34,11 @@ const Form = () => {
           localStorage.setItem('auth', JSON.stringify({ token: response.token }));
           navigate('/dashboard/main');
         } else {
-          toast.error('You are not registered');
+          console.log(response.message);
+          toast.error(response.message);
         }
       }
+
     } catch (err) {
       toast.error(err.message);
     } finally {
